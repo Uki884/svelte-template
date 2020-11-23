@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import preprocess from 'svelte-preprocess';
+import { typescript } from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -29,7 +30,7 @@ function serve() {
 }
 
 export default {
-	input: 'src/main.js',
+	input: 'src/main.ts',
 	output: {
 		sourcemap: true,
 		format: 'iife',
@@ -42,7 +43,7 @@ export default {
 			dev: !production,
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
-			preprocess: preprocess()
+			preprocess: [preprocess(), typescript({ tsconfigFile: './tsconfig.json' })]
 		}),
 
 		// If you have external dependencies installed from

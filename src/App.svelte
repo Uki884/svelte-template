@@ -1,11 +1,15 @@
-<script>
+<script lang="ts">
 	import { counter } from "./store";
 	console.log(counter);
+	
+	const upCount = (): void=> {
+		counter.update(n => n + 1)
+	}
 </script>
 
 <main>
 	<div class="main">
-		<span class="text">counter value: {$counter}</span>
+		<button class="text" on:click={() => upCount()}>counter value: {$counter}</button>
 	</div>
 </main>
 
